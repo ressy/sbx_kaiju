@@ -39,6 +39,8 @@ rule kaiju_classify:
     params:
         nodes = str(Cfg['sbx_kaiju']['nodes_fp']),
         db = str(Cfg['sbx_kaiju']['db_fp'])
+    conda:
+        "sbx_kaiju_env.yml"
     shell:
         """
         kaiju -t {params.nodes} -f {params.db} -z {threads} \
@@ -53,6 +55,8 @@ rule kaiju_add_taxonomy:
     params:
         nodes = str(Cfg['sbx_kaiju']['nodes_fp']),
         names = str(Cfg['sbx_kaiju']['names_fp'])
+    conda:
+        "sbx_kaiju_env.yml"
     shell:
         """
         addTaxonNames -t {params.nodes} -n {params.names} -i {input} \

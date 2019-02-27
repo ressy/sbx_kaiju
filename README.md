@@ -9,12 +9,7 @@ With your sunbeam conda environment activated,
     git clone https://github.com/sunbeam-labs/sbx_kaiju sunbeam/extensions/sbx_kaiju
     ```
     
-2. Install the requirements:
-    ```shell
-    conda install --file sunbeam/extensions/sbx_kaiju/requirements.txt
-    ```
-
-3. Add the new config options to your config file:
+2. Add the new config options to your config file:
     ```shell
     cat sunbeam/extensions/sbx_kaiju/config.yml >> my_config.yml
     ```
@@ -31,4 +26,11 @@ Make sure to edit your config file to set the `nodes_fp`, `names_fp`, and `db_fp
 
 ## Usage
 
-This adds a new rule, `all_kaiju`. Specify this as your target to use Kaiju to classify your decontaminated samples.
+This adds a new rule, `all_kaiju`. Specify this as your target to use Kaiju to
+classify your decontaminated samples, and add Snakemake's `--use-conda`
+option:
+
+    sunbeam run --configfile=sunbeam_config.yml --use-conda all_kaiju
+
+(`--use-conda` will tell Snakemake to automatically maintain a separate conda
+environment from Sunbeam for this extension, to avoid any package conflicts.)
